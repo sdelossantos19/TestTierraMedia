@@ -7,7 +7,7 @@ namespace RoleplayGame.Library.Test
     public class ExchangeEncounterTest
     {
         [Test]
-        public void TestDeath()
+        public void Test()
         {
             //desfio 17
         }
