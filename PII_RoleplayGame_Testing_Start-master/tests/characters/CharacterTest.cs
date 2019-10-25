@@ -27,7 +27,26 @@ namespace RoleplayGame.Library.Test
             bool expectedDeathValue = true;
             bool actualDeathValue = wizard.IsDead;
 
-            Assert.AreEqual(actualDeathValue, expectedDeathValue);
+            Assert.AreEqual(expectedDeathValue, actualDeathValue);
+        }
+
+        [Test]
+        public void TestAttackPowerSum()
+        {
+            //Desafio 11
+            Wizard wizard = new Wizard("Wizard");
+            int baseAtackPower = wizard.AttackPower;
+            MagicStick magicStick = new MagicStick();
+            Gauntlet gauntlet = new Gauntlet();
+
+            wizard.AddItem(new MagicStick());
+            wizard.AddItem(new Gauntlet());
+
+            int atackPowerFromItems = magicStick.AttackPower + gauntlet.AttackPower;
+            int expectedAtackPower = baseAtackPower + atackPowerFromItems;
+            int actualAtackPower = wizard.AttackPower;
+
+            Assert.AreEqual(expectedAtackPower, actualAtackPower);
         }
     }
 }
