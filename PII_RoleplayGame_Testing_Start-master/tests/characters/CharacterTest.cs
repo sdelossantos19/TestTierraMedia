@@ -76,7 +76,7 @@ namespace RoleplayGame.Library.Test
             elf1.AddItem(magic1);
             int actual = elf1.AttackPower;
             int expected = 80;
-            Assert.AreEqual(actual,expected);
+            Assert.AreEqual(actual, expected);
 
         }
         [Test]
@@ -87,7 +87,7 @@ namespace RoleplayGame.Library.Test
             elf1.AddItem(magic1);
             int actual = elf1.DefensePower;
             int expected = 32;
-            Assert.AreEqual(actual,expected);
+            Assert.AreEqual(actual, expected);
 
         }
 
@@ -99,7 +99,7 @@ namespace RoleplayGame.Library.Test
             elf1.ReceiveAttack(wizard1.AttackPower);
             int actual = elf1.Health;
             int expected = (120 - (80 - 2));
-            Assert.AreEqual(actual,expected);
+            Assert.AreEqual(actual, expected);
 
         }
 
@@ -111,68 +111,65 @@ namespace RoleplayGame.Library.Test
             bool throwexcexption = false;
             try
             {
-              wizard.RemoveItem(robes);  
+                wizard.RemoveItem(robes);
             }
             catch (ItemNotFoundException)
             {
-                
+
                 throwexcexption = true;
             }
-            
+
             Assert.True(throwexcexption);
 
         }
+
+        [Test]
+        public void RemoveMagicItemAttack()
+        {
+            Wizard wizard = new Wizard("gandalf");
+            int AttackExpected = 80;
+            Assert.AreEqual(AttackExpected, wizard.AttackPower);
+
+            wizard.RemoveItem(wizard.Items[0]);
+            int AttackExpected2 = 0;
+            Assert.AreEqual(AttackExpected2, wizard.AttackPower);
+        }
+        [Test]
+        public void RemoveMagicItemDefense()
+        {
+            Wizard wizard = new Wizard("gandalf");
+            int DefenseExpected = 30;
+            Assert.AreEqual(DefenseExpected, wizard.DefensePower);
+
+            wizard.RemoveItem(wizard.Items[0]);
+            int DefenseExpected2 = 0;
+            Assert.AreEqual(DefenseExpected2, wizard.DefensePower);
+        }
+        [Test]
+        public void AttackWithHelth()
+        {
+            Wizard wizard = new Wizard("gandalf");
+            int Health = wizard.Health;
+            int Defense = wizard.DefensePower;
+            wizard.ReceiveAttack(Health + Defense);
+
+            int HealthExpected = 0;
+
+            wizard.ReceiveAttack(20);
+            Assert.AreEqual(HealthExpected, wizard.Health);
+        }
+        [Test]
+        public void AttackWithArmor()
+        {
+            Wizard wizard = new Wizard("gandalf");
+            int Health = wizard.Health;
+            int Defense = wizard.DefensePower;
+            wizard.ReceiveAttack(10);
+
+            int HealthExpected = 80;
+
+            Assert.AreEqual(HealthExpected, wizard.Health);
+        }
     }
-
-         public class CharacterTest
-         {
-                  [Test]
-                  public void RemoveMagicItemAttack()
-                  {
-                           Wizard wizard = new Wizard("gandalf");
-                           int AttackExpected = 80;
-                           Assert.AreEqual(AttackExpected, wizard.AttackPower);
-
-                           wizard.RemoveItem(wizard.Items[0]);
-                           int AttackExpected2 = 0;
-                           Assert.AreEqual(AttackExpected2, wizard.AttackPower);
-                  }
-                  [Test]
-                  public void RemoveMagicItemDefense()
-                  {
-                           Wizard wizard = new Wizard("gandalf");
-                           int DefenseExpected = 30;
-                           Assert.AreEqual(DefenseExpected, wizard.DefensePower);
-
-                           wizard.RemoveItem(wizard.Items[0]);
-                           int DefenseExpected2 = 0;
-                           Assert.AreEqual(DefenseExpected2, wizard.DefensePower);
-                  }
-                  [Test]
-                  public void AttackWithHelth()
-                  {
-                           Wizard wizard = new Wizard("gandalf");
-                           int Health = wizard.Health;
-                           int Defense = wizard.DefensePower;
-                           wizard.ReceiveAttack(Health + Defense);
-
-                           int HealthExpected = 0;
-                           
-                           wizard.ReceiveAttack(20);
-                           Assert.AreEqual(HealthExpected,wizard.Health);
-                  }
-                  [Test]
-                  public void AttackWithArmor()
-                  {
-                           Wizard wizard = new Wizard("gandalf");
-                           int Health = wizard.Health;
-                           int Defense = wizard.DefensePower;
-                           wizard.ReceiveAttack(10);
-
-                           int HealthExpected = 80;
-                           
-                           Assert.AreEqual(HealthExpected,wizard.Health);
-                  }
-         }
 
 }
