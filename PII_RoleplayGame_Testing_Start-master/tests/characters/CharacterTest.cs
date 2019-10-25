@@ -48,5 +48,24 @@ namespace RoleplayGame.Library.Test
 
             Assert.AreEqual(expectedAtackPower, actualAtackPower);
         }
+
+        [Test]
+        public void TestDefensePowerSum()
+        {
+            //Desafio 12
+            Wizard wizard = new Wizard("Wizard");
+            int baseDefensePower = wizard.DefensePower;
+            MagicStick magicStick = new MagicStick();
+            Armor armor = new Armor();
+
+            wizard.AddItem(new MagicStick());
+            wizard.AddItem(new Armor());
+
+            int defensePowerFromItems = magicStick.DefensePower + armor.DefensePower;
+            int expectedDefensePower = baseDefensePower + defensePowerFromItems;
+            int actualDefensePower = wizard.DefensePower;
+
+            Assert.AreEqual(expectedDefensePower, actualDefensePower);
+        }
     }
 }
